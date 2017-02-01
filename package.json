@@ -1,6 +1,6 @@
 {
   "name": "simple-pg",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simplified api against Postgresql using promises and objects Edit",
   "main": "lib/pg.js",
   "scripts": {
