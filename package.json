@@ -1,0 +1,43 @@
+{
+  "name": "simple-pg",
+  "version": "0.0.0",
+  "description": "A simplified api against Postgresql using promises and objects Edit",
+  "main": "lib/pg.js",
+  "scripts": {
+    "test": "mocha test/**/*.js",
+    "patch-release": "npm version patch && npm publish && git push origin master --follow-tags",
+    "minor-release": "npm version minor && npm publish && git push origin master --follow-tags",
+    "major-release": "npm version major && npm publish && git push origin master --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohanObrink/simple-pg.git"
+  },
+  "keywords": [
+    "Postgresql",
+    "pg",
+    "promises",
+    "simple"
+  ],
+  "author": "Johan Öbrink <johan.obrink@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JohanObrink/simple-pg/issues"
+  },
+  "homepage": "https://github.com/JohanObrink/simple-pg#readme",
+  "dependencies": {
+    "pg-promise": "^5.5.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.14.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0",
+    "moment": "^2.17.1"
+  }
+}
