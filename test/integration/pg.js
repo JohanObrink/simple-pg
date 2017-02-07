@@ -119,4 +119,26 @@ describe('pg', () => {
         })
     })
   })
+  describe('batchUpsert', () => {
+    it('runs multiple upserts', () => {
+      const d2 = Object.assign({}, d, { id: '2', name: '0as90dsa90sad' })
+      return db
+        .insert('test', d)
+        .then(() => {
+          d.name = 'alex'
+          return db.batchUpsert([
+            ['test', d.id, omit(d, 'id')],
+            ['test', d2.id, omit(d2, 'id')]
+          ])
+        })
+        .then(() => {
+          return db.query(sql)
+        })
+        .then(res => {
+          expect(res)
+            .to.have.length(2)
+            .and.eql([d, d2])
+        })
+    })
+  })
 })
