@@ -1,5 +1,5 @@
 const {expect} = require('chai')
-const {insert, truncate, update, upsert} = require(`${process.cwd()}/lib/sqlbuilder`)
+const {insert, truncate, update, upsert, del} = require(`${process.cwd()}/lib/sqlbuilder`)
 
 describe('sqlbuilder', () => {
   describe('insert', () => {
@@ -94,6 +94,40 @@ describe('sqlbuilder', () => {
         ]
       }
       expect(upsert('my_table', '1', {name: 'johan', age: 43}))
+        .to.eql(expected)
+    })
+  })
+  describe('#del()', () => {
+    it('builds a delete query with simple where', () => {
+      const expected = {
+        sql: 'DELETE FROM $1~ WHERE $2~=$3;',
+        params: [
+          // table name
+          'my_table',
+          // column names for WHERE
+          'id',
+          // values for WHERE
+          '1'
+        ]
+      }
+      expect(del('my_table', {id: '1'}))
+        .to.eql(expected)
+    })
+    it('builds a delete query with supplied where', () => {
+      const expected = {
+        sql: 'DELETE FROM $1~ WHERE $2~=$4 AND $3~=$5;',
+        params: [
+          // table name
+          'my_table',
+          // column names for WHERE
+          'id',
+          'user_id',
+          // values for WHERE
+          '1',
+          2001
+        ]
+      }
+      expect(del('my_table', {id: '1', user_id: 2001}))
         .to.eql(expected)
     })
   })
