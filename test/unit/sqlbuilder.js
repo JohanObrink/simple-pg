@@ -5,7 +5,7 @@ describe('sqlbuilder', () => {
   describe('insert', () => {
     it('creates a simple insert', () => {
       const expected = {
-        sql: 'INSERT INTO $1~($2~, $3~) VALUES($4, $5);',
+        sql: 'INSERT INTO $1~($2~, $3~) VALUES($4, $5) RETURNING id;',
         params: ['my_table', 'name', 'age', 'johan', 43]
       }
       expect(insert('my_table', {name: 'johan', age: 43}))
@@ -13,7 +13,7 @@ describe('sqlbuilder', () => {
     })
     it('handles json type', () => {
       const expected = {
-        sql: 'INSERT INTO $1~($2~) VALUES($3);',
+        sql: 'INSERT INTO $1~($2~) VALUES($3) RETURNING id;',
         params: ['my_table', 'data', '{"name":"johan","age":43}']
       }
       expect(insert('my_table', {data: {name: 'johan', age: 43}}))
@@ -21,7 +21,7 @@ describe('sqlbuilder', () => {
     })
     it('handles array type', () => {
       const expected = {
-        sql: 'INSERT INTO $1~($2~) VALUES($3);',
+        sql: 'INSERT INTO $1~($2~) VALUES($3) RETURNING id;',
         params: ['my_table', 'hobbies', ['code', 'beer']]
       }
       expect(insert('my_table', {hobbies: ['code', 'beer']}))
@@ -82,7 +82,7 @@ describe('sqlbuilder', () => {
   describe('upsert', () => {
     it('builds a proper upsert query', () => {
       const expected = {
-        sql: 'INSERT INTO $1~($2~, $3~, $4~) VALUES($5, $6, $7) ON CONFLICT(id) DO UPDATE SET $3~=EXCLUDED.$3~, $4~=EXCLUDED.$4~;',
+        sql: 'INSERT INTO $1~($2~, $3~, $4~) VALUES($5, $6, $7) ON CONFLICT(id) DO UPDATE SET $3~=EXCLUDED.$3~, $4~=EXCLUDED.$4~ RETURNING id;',
         params: [
           'my_table',
           'id',
