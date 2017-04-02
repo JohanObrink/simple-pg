@@ -13,7 +13,7 @@ npm install --save simple-pg
 ```js
 pgm.select('users') // DON'T
 pgm.select('users', {
-  columns: {},
+  columns: [],
   where: {user_id: {ge: 1}, taxonomy_handle: '16', section: 'experience', taxonomy_type: 'profession'},
   limit: 100
 })
