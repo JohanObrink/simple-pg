@@ -57,7 +57,7 @@ pgm
   .then(res => console.log(res))    // logs array of {id: UPDATED_ID}
 
 pgm
-  .update('users', 'user_id, user, {user_id: 1, taxonomy_handle: '16', section: 'experience'})
+  .update('users', 'user_id', user, {user_id: 1, taxonomy_handle: '16', section: 'experience'})
                                     // where user_id = 1 AND taxonomy_handle = '16' AND section = 'experience'
   .then(res => console.log(res))    // logs array of {user_id: UPDATED_ID}
 ```
